@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export default function Header() {
   return (
     <div className='header'>
@@ -5,8 +7,8 @@ export default function Header() {
         Career Point University Hamirpur
       </h3>
       <nav className='header--links'>
-        <li className='header--link'>Events</li>
-        <li className='header--link'>Profile</li>
+        <Link to='/events' className='header--link'>Events</Link>
+        <Link to='/profile' className='header--link'>Profile</Link>
       </nav>
     </div>
   )

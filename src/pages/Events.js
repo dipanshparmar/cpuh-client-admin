@@ -1,19 +1,27 @@
-import { Route, Routes } from 'react-router-dom'
+import { Link, Route, Routes } from 'react-router-dom'
 import NotFound from './NotFound'
 import AllEvents from './AllEvents'
 import NewEvent from './NewEvent'
+import { useState } from 'react'
 
 export default function Events() {
+  // active state for the events tab
+  const [eventsIsActive, setEventsIsActive] = useState(true)
+
   return (
     <div className='events'>
       <div className='events--header'>
-        <div className='events--header--section'>
-          Create a new event
-        </div>
+        <Link to='/events/new'>
+          <div className={`events--header--section ${eventsIsActive ? '' : 'active'}`} onClick={() => setEventsIsActive(false)}>
+              Create a new event
+          </div>
+        </Link>
         {/* TODO: active class will be given dynamically */}
-        <div className='events--header--section active'>
-          View active events
-        </div>
+        <Link to='/events'>
+          <div className={`events--header--section ${eventsIsActive && 'active'}`} onClick={() => setEventsIsActive(true)}>
+              View active events
+          </div>
+        </Link>
       </div>
 
       <Routes>
