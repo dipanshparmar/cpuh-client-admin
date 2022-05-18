@@ -1,38 +1,89 @@
-.App {
-  text-align: center;
+/* inter font-family */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+/* variables */
+:root {
+  --dark-black: #292929;
+  --light-black: #2f2f2f;
+  --lighter-black: #404040;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body {
+  font-family: inter;
+  background-color: var(--lighter-black);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.header {
+  background-color: var(--dark-black);
+  padding: 1.5rem;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header--links {
+  display: flex;
+  column-gap: 2rem;
+}
+
+.header--link {
+  list-style: none;
+  cursor: pointer;
+  padding: .5rem;
+}
+
+.login {
+  display: flex;
+  justify-content: center;
+}
+
+.login--form {
+  margin: 10rem 0;
   display: flex;
   flex-direction: column;
+  row-gap: 2rem;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  width: 100%;
+}
+
+.login--form--heading {
+  font-weight: bold;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.login--form form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
+  width: 20%;
+  align-items: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.login--form--input {
+  padding: 1.3rem 1.5rem;
+  border-radius: .5rem;
+  border: 0;
+  width: 100%;
+  outline: none;
+  font-weight: bold;
+  font-size: .9rem;
+}
+
+.login--form--submit {
+  width: 100%;
+  padding: 1.3rem 1.5rem;
+  border-radius: .5rem;
+  border: 0;
+  background-color: var(--dark-black);
+  font-weight: bold;
+  font-size: .9rem;
+  color: white;
+  cursor: pointer;
 }
