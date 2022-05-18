@@ -19,6 +19,26 @@ body {
   background-color: var(--lighter-black);
 }
 
+input {
+  padding: 1.3rem 1.5rem;
+  border-radius: .5rem;
+  border: 0;
+  outline: none;
+  font-weight: bold;
+  font-size: .9rem;
+}
+
+input[type='submit'] {
+  cursor: pointer;
+  background-color: var(--dark-black);
+  color: white;
+}
+
+.separator {
+  height: .1rem;
+  background-color: rgba(255, 255, 255, .5);
+}
+
 .header {
   background-color: var(--dark-black);
   padding: 1.5rem;
@@ -67,23 +87,51 @@ body {
 }
 
 .login--form--input {
-  padding: 1.3rem 1.5rem;
-  border-radius: .5rem;
-  border: 0;
   width: 100%;
-  outline: none;
-  font-weight: bold;
-  font-size: .9rem;
 }
 
 .login--form--submit {
   width: 100%;
-  padding: 1.3rem 1.5rem;
-  border-radius: .5rem;
-  border: 0;
   background-color: var(--dark-black);
-  font-weight: bold;
-  font-size: .9rem;
   color: white;
-  cursor: pointer;
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
+  padding: 2rem;
+}
+
+.profile--greeting {
+  color: white;
+}
+
+.profile--row {
+  display: flex;
+  justify-content: space-between;
+  column-gap: 2rem;
+}
+
+.profile--input {
+  flex: 5;
+}
+
+.profile--submit {
+  flex: 1;
+}
+
+.profile--separator {
+  width: 2%;
+  align-self: center;
+}
+
+.profile--form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
+}
+
+.update-pass {
+  flex: 2;
 }
