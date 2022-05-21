@@ -1,4 +1,76 @@
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import api from '../services/api'
+
 export default function Login() {
+
+  // login data state
+  const [formData, setFormData] = useState({
+    'username': '',
+    'password': '',
+  })
+
+  // loading state
+  const [isLoading, setIsLoading] = useState(false)
+
+  // navigation
+  const navigate = useNavigate()
+
+  // function to handle the change
+  function handleChange(e) {
+    // getting the required values from the target
+    const { name, value }  = e.target
+
+    // setting the new data
+    setFormData({
+      ...formData,
+      [name]: value
+    })
+  }
+
+  // function to handle the submit
+  async function handleSubmit(e) {
+    // preventing default
+    e.preventDefault()
+
+    // validating the form data
+    if (formData.username.trim().length === 0) {
+      alert('username can not be empty!')
+      return
+    }
+
+    if (formData.password.trim().length === 0) {
+      alert('password can not be empty!')
+      return
+    }
+
+    // logging the user in
+    try {
+      // setting isloading to true
+      setIsLoading(true)
+
+      const res = await api.post('auth/login', {
+        'username': formData.username,
+        'password': formData.password,
+      })
+
+      // if res is 200 then we are authenticated
+      if (res.status == 200) {
+        // navigate the user to the home
+        return navigate('/events', {replace: true})
+      }
+    } catch (err) {
+      if (err.response) {
+        console.log(err.response.data.message)
+        return
+      }
+
+      console.log(err)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   return (
     <div className='login'>
       <div className='login--form'>
@@ -6,10 +78,10 @@ export default function Login() {
           Welcome! Please login to continue
         </p>
 
-        <form>
-          <input type='text' placeholder='Username' className='login--form--input' />
-          <input type='password' placeholder='Password' className='login--form--input' />
-          <input type='submit' value='Log In' className='login--form--submit' />
+        <form method='POST' action='#' onSubmit={handleSubmit}>
+          <input type='text' placeholder='Username' className='login--form--input' name='username' value={formData.username} onChange={handleChange} />
+          <input type='password' placeholder='Password' className='login--form--input' name='password' value={formData.password} onChange={handleChange} />
+          <input type='submit' value={isLoading ? 'Logging In...' : 'Log In'} className='login--form--submit' />
         </form>
       </div>
     </div>

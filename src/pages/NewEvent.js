@@ -1,29 +1,134 @@
+import { useState } from 'react'
+import api from '../services/api'
+
 export default function NewEvent() {
+  // form data state
+  const [formData, setFormData] = useState({
+    'title': '',
+    'description': '',
+    'day': '',
+    'imageUrl': '',
+    'isFestival': false // default
+  })
+
+  // loader state
+  const [isLoading, setIsLoading] = useState(false)
+
+  // function to handle change in form inputs
+  function handleChange(e) {
+    // getting the target's name and value
+    const { name, value } = e.target
+    
+    // setting the state
+    setFormData({
+      ...formData, // copying the form data
+      [name]: value, // setting the new data
+    })
+  }
+
+  // handling submit
+  async function handleSubmit(e) {
+    // preventing default
+    e.preventDefault()
+
+    // validating form data
+    if (formData.title.trim().length === 0) {
+      alert('Title is required!')
+      return
+    }
+
+
+    // TODO: FIX THIS OR COMPLETE THIS
+    // setting the loader state
+    setIsLoading(true)
+
+    try {
+      // posting the data to the server
+      const res = await api.post('events', {
+        title: formData.title,
+        description: formData.description,
+        day: formData.day,
+        imageUrl: formData.imageUrl,
+        isFestival: formData.isFestival
+      })
+
+      // resetting the fields
+      setFormData({
+        title: '',
+        description: '',
+        day: '',
+        imageUrl: '',
+        isFestival: false,
+      })
+    } catch (err) {
+      console.log(err)
+    } finally {
+      // set the loader state
+      setIsLoading(false)
+    }
+  }
+
   return (
     <div className='new-event'>
-      <form className='new-event--form'>
-        <input type='text' className='new-event--form--input' placeholder='Enter Title' />
+      <form method='POST' action='#' className='new-event--form' onSubmit={handleSubmit}>
+        <input
+          type='text'
+          className='new-event--form--input'
+          placeholder='Enter Title'
+          name='title'
+          onChange={handleChange}
+          value={formData.title}
+        />
         <div className='separator new-event--form--separator'></div>
-        <textarea type='text' className='new-event--form--input new-event--form--input--description' placeholder='Enter Description'></textarea>
+        <textarea
+          type='text'
+          className='new-event--form--input new-event--form--input--description'
+          placeholder='Enter Description'
+          name='description'
+          onChange={handleChange}
+          value={formData.description}
+        >
+        </textarea>
         <div className='separator new-event--form--separator'></div>  
         <div className='new-event--form--row'>
           <div className='new-event--form--input-container'>
             <label htmlFor='date'>Enter date (optional)</label>
-            <input id='date' type='date' className='new-event--form--input new-event--form--input--date' />
+            <input
+              id='date'
+              type='date'
+              className='new-event--form--input new-event--form--input--date'
+              name='day'
+              onChange={handleChange}
+              value={formData.day}
+            />
           </div>
           <div className='new-event--form--input-container'>
-            <label htmlFor='image'>Enter Image URL (optional)</label>
-            <input id='image' type='text' placeholder='e.g. https://something.com/23.jpg' className='new-event--form--input' />
+            <label htmlFor='image'>Enter Image imageUrl (optional)</label>
+            <input
+              id='image'
+              type='text'
+              placeholder='e.g. https://something.com/23.jpg'
+              className='new-event--form--input'
+              name='imageUrl'
+              onChange={handleChange}
+              value={formData.imageUrl}
+            />
           </div>
           <div className='new-event--form--input-container'>
             <label htmlFor='type'>Choose event type</label>
-            <select id='type' className='new-event--form--input new-event--form--input--select'>
-              <option value='event'>Event</option>
-              <option value='festival'>Festival</option>
+            <select
+              id='type'
+              className='new-event--form--input new-event--form--input--select'
+              name='isFestival'
+              onChange={handleChange}
+              value={formData.isFestival}
+            >
+              <option value={false}>Event</option>
+              <option value={true}>Festival</option>
             </select>
           </div>
         </div>
-        <input type='submit' value='SAVE' className='new-event--form--submit' />
+        <input type='submit' value={isLoading ? 'SAVING...' : 'SAVE'} className='new-event--form--submit' />
       </form>
     </div>
   )
