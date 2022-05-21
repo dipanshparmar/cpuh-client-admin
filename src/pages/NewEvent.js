@@ -37,8 +37,6 @@ export default function NewEvent() {
       return
     }
 
-
-    // TODO: FIX THIS OR COMPLETE THIS
     // setting the loader state
     setIsLoading(true)
 
@@ -106,7 +104,7 @@ export default function NewEvent() {
             <label htmlFor='image'>Enter Image imageUrl (optional)</label>
             <input
               id='image'
-              type='text'
+              type='url'
               placeholder='e.g. https://something.com/23.jpg'
               className='new-event--form--input'
               name='imageUrl'

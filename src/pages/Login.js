@@ -55,7 +55,7 @@ export default function Login() {
       })
 
       // if res is 200 then we are authenticated
-      if (res.status == 200) {
+      if (res.status === 200) {
         // navigate the user to the home
         return navigate('/events', {replace: true})
       }

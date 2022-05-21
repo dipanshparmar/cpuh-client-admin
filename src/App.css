@@ -126,6 +126,8 @@ a {
 
 .profile--input {
   flex: 5;
+  background-color: transparent;
+  border: 2px solid var(--half-white);
 }
 
 .profile--submit {
@@ -181,6 +183,11 @@ a {
   margin: 20rem 0;
 }
 
+.all-events {
+  display: flex;
+  flex-direction: column;
+}
+
 .all-events--search {
   background-color: transparent;
   caret-color: var(--half-white);
@@ -219,10 +226,9 @@ a {
 
 .event-card--extras {
   display: flex;
-  font-weight: bold;
   justify-content: space-between;
   margin-top: .5rem;
-  font-size: .9rem;
+  font-size: .85em;
 }
 
 .event-card--extras--info, .event-card--extras--buttons {

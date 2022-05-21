@@ -16,7 +16,6 @@ export default function Events() {
               Create a new event
           </div>
         </Link>
-        {/* TODO: active class will be given dynamically */}
         <Link to='/events'>
           <div className={`events--header--section ${eventsIsActive && 'active'}`} onClick={() => setEventsIsActive(true)}>
               View active events
