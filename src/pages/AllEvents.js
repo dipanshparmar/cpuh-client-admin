@@ -38,8 +38,8 @@ export default function AllEvents() {
     const cards = events.map(event => {
       return (
         <EventCard
-          key={events._id}
-          id={events._id}
+          key={event._id}
+          id={event._id}
           title={event.title}
           description={event.description}
           day={event.day}
