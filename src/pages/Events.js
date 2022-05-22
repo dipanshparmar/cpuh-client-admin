@@ -3,6 +3,7 @@ import NotFound from './NotFound'
 import AllEvents from './AllEvents'
 import NewEvent from './NewEvent'
 import { useState } from 'react'
+import Edit from './Edit'
 
 export default function Events() {
   // active state for the events tab
@@ -26,6 +27,7 @@ export default function Events() {
       <Routes>
         <Route path='/' element={<AllEvents />} />
         <Route path='/new' element={<NewEvent />} />
+        <Route path='/edit/:id' element={<Edit />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
     </div>

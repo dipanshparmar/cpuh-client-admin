@@ -9,6 +9,18 @@ export default function AllEvents() {
   // loading state
   const [isLoading, setIsLoading] = useState(false)
 
+  // state for serch
+  const [searchQuery, setSearchQuery] = useState('')
+
+  // function to handle search query change
+  function handleChange(e) {
+    // grabbing the value
+    const { value } = e.target
+
+    // updating the query
+    setSearchQuery(value)
+  }
+
   // fetching the events from the api
   useEffect(() => {
     setIsLoading(true)
@@ -32,10 +44,26 @@ export default function AllEvents() {
     }
   } 
 
+  // function to delete an event
+  async function deleteEvent(id) {
+    // making a delete request to the server
+    try {
+      const res = await api.delete(`events/${id}`)
+
+      // grabbing the new array set
+      const data = res.data.data
+
+      // setting the new data
+      setEvents(data)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   // function to get event cards
-  function getEventCards() {
+  function getEventCards(data) {
     // array to store the event cards
-    const cards = events.map(event => {
+    const cards = data.map(event => {
       return (
         <EventCard
           key={event._id}
@@ -45,6 +73,8 @@ export default function AllEvents() {
           day={event.day}
           imageUrl={event.imageUrl}
           isFestival={event.isFestival}
+          onDelete={() => deleteEvent(event._id)}
+          updateEvents={setEvents}
         />
       )
     })
@@ -53,13 +83,41 @@ export default function AllEvents() {
     return cards
   }
 
+  // function to get search results
+  function getSearchResults() {
+    return getEventCards(events.filter(event => {
+      if (event.title.includes(searchQuery)) {
+        return true
+      }
+
+      // if event has a description then search there as well
+      if (event.description) {
+        return event.description.includes(searchQuery)
+      }
+
+      return false
+    }))
+  }
+
   return (
     <div className='all-events'>
-      <input type='text' className='all-events--search' placeholder='Search...' />
+      <input
+        type='text'
+        className='all-events--search'
+        placeholder='Search...'
+        value={searchQuery}
+        onChange={handleChange}
+      />
       {
         isLoading
         ? <p style={{alignSelf: 'center', color: 'white', margin: '2rem 0'}}>Loading...</p>
-        : events.length === 0 ? <p style={{alignSelf: 'center', color: 'white', margin: '2rem 0'}}>No events!</p> : getEventCards()
+        : events.length === 0
+          ? <p style={{alignSelf: 'center', color: 'white', margin: '2rem 0'}}>No events!</p>
+          : searchQuery
+            ? getSearchResults().length === 0
+              ? <p style={{alignSelf: 'center', color: 'white', margin: '2rem 0'}}>No search results found!</p>
+              : getSearchResults()
+            : getEventCards(events)
       }
     </div>
   )

@@ -1,4 +1,24 @@
+import { useNavigate } from 'react-router-dom'
+
 export default function EventCard(props) {
+  // function to handle delete
+  function handleDelete() {
+    // asking if they are sure about this
+    const confirmDelete = window.confirm('Are you sure?')
+
+    if (!confirmDelete) {
+      return
+    }
+
+    props.onDelete()
+  }
+
+  const navigate = useNavigate()
+
+  // function to handle edit
+  function handleEdit() {
+    navigate(`/events/edit/${props.id}`)
+  }
 
   return (
     <div className='event-card'>
@@ -17,8 +37,8 @@ export default function EventCard(props) {
           </p>
         </div>
         <div className='event-card--extras--buttons'>
-          <p className='event-card--extras--button event-card--extras--button--delete'>Delete now</p>
-          <p className='event-card--extras--button'>Edit</p>
+          <p className='event-card--extras--button event-card--extras--button--delete' onClick={handleDelete}>Delete now</p>
+          <p className='event-card--extras--button' onClick={handleEdit}>Edit</p>
         </div>
       </div>
     </div>

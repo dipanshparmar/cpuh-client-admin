@@ -10,6 +10,10 @@
   --half-white: rgba(255, 255, 255, .5);
 }
 
+::-webkit-scrollbar {
+  display: none
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -246,13 +250,15 @@ a {
   color: #FF0707;
 }
 
-.new-event {
-  margin-bottom: 20rem;
-}
-
 .new-event--form {
   display: flex;
   flex-direction: column;
+}
+
+.edit-event--form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
 }
 
 .new-event--form--input {
@@ -264,7 +270,15 @@ a {
   color: white;
 }
 
-.new-event--form--input::placeholder {
+.edit-event--form--input {
+  border: .15rem solid var(--half-white);
+  background-color: transparent;
+  outline: none;
+  caret-color: var(--half-white);
+  color: white;
+}
+
+.new-event--form--input::placeholder, .edit-event--form--input::placeholder {
   color: var(--half-white);
 }
 
@@ -290,6 +304,13 @@ a {
   resize: none;
 }
 
+.edit-event--form--input--description {
+  resize: none;
+  border-radius: .5rem;
+  padding: .5rem;
+  height: 10rem;
+}
+
 .new-event--form--input-container {
   margin: 2rem;
   display: flex;
@@ -297,7 +318,13 @@ a {
   row-gap: 1rem;
 }
 
-.new-event--form--input-container label {
+.edit-event--form--input-container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+}
+
+.new-event--form--input-container label, .edit-event--form--input-container label {
   color: var(--half-white);
 }
 
@@ -306,19 +333,44 @@ a {
   padding: 1rem 0;
   border: .1rem solid var(--half-white);
   padding: 1rem 1.5rem;
-  border-radius: .5rem;
+  border-radius: .5rem;  
 }
 
-.new-event--form--input--select {
+.new-event--form--input--select, .edit-event--form--input--select {
   padding: 1rem;
   color-scheme: dark;
   color: white;
 }
 
+.edit-event--form--input--select {
+  border-radius: .5rem;
+}
+
 .new-event--form--submit {
-  border-radius: 0;
-  position: fixed;
-  bottom: 0;
+  border-radius: .5rem;
+  margin: 0 2rem 2rem 2rem;
+}
+
+.modal {
+  position: absolute;
+  top: 0;
   right: 0;
   left: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, .5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal--content {
+  padding: 2rem 3rem;
+  background-color: var(--lighter-black);
+  border: 0;
+  border-radius: .5rem;
+  color: white;
+  margin: 20rem;
+  width: 50%;
+  overflow-y: scroll;
+  height: 80vh;
 }
