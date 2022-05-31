@@ -113,6 +113,20 @@ export default function AllEvents() {
     }))
   }
 
+  // function to delete all the events
+  async function handleDelete() {
+    try {
+      // making a request to delete all the events
+      await api.delete('events')
+
+      // setting the events to an empty list
+      setEvents([])
+    } catch (err) {
+      // if there is an error
+      console.log(err)
+    }
+  }
+
   return (
     <div className='all-events'>
       <input
@@ -133,6 +147,13 @@ export default function AllEvents() {
               : getSearchResults()
             : getEventCards(events)
       }
+
+      {/* showing the delete only button only if there are events */}
+      {events.length !== 0 && <button className='all-events--delete' onClick={() => {
+        if (window.confirm('Are you sure you want to delete all the events?')) {
+          handleDelete()
+        }
+      }}>delete all</button>}
     </div>
   )
 }
