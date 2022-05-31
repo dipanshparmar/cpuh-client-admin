@@ -374,3 +374,17 @@ a {
   overflow-y: scroll;
   height: 80vh;
 }
+
+.all-events--delete {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  text-transform: uppercase;
+  padding: 1rem 1.5rem;
+  border-radius: .5rem;
+  border: 0;
+  background-color: var(--dark-black);
+  font-weight: bold;
+  color: red;
+  cursor: pointer;
+}
