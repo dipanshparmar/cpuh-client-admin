@@ -1,4 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import api from '../services/api'
 
 export default function Profile() {
@@ -10,6 +12,18 @@ export default function Profile() {
 
   // loading state for password
   const [passwordIsLoading, setPasswordIsLoading] = useState(false)
+
+  // selector
+  const isLogged = useSelector(state => state)
+
+  // navigate
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (!isLogged) {
+      navigate('/login')
+    }
+  }, [])
 
   // handle username change
   function handleUsernameChange(e) {
@@ -130,7 +144,7 @@ export default function Profile() {
       <form className='profile--form' method='POST' onSubmit={handlePasswordsSubmit}>
         <div className='profile--row'>
           <input
-            type='text'
+            type='password'
             className='profile--input'
             placeholder='Current password'
             value={passwordForm.existingPassword}
@@ -138,7 +152,7 @@ export default function Profile() {
             onChange={handlePasswordChanges}
           />
           <input
-            type='text'
+            type='password'
             className='profile--input'
             placeholder='New password'
             value={passwordForm.newPassword}
@@ -148,7 +162,7 @@ export default function Profile() {
         </div>
         <div className='profile--row'>
           <input 
-            type='text'
+            type='password'
             className='profile--input'
             placeholder='Confirm new password'
             value={passwordForm.confirmNewPassword}
