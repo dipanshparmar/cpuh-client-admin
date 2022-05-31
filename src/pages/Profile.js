@@ -100,7 +100,7 @@ export default function Profile() {
       return alert('New password can not be empty!')
     }
 
-    if (passwordForm.newPassword != passwordForm.confirmNewPassword) {
+    if (passwordForm.newPassword !== passwordForm.confirmNewPassword) {
       return alert('Passwords do not match!')
     }
 
