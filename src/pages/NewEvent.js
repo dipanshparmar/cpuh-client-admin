@@ -1,4 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import api from '../services/api'
 
 export default function NewEvent() {
@@ -10,6 +12,18 @@ export default function NewEvent() {
     'imageUrl': '',
     'isFestival': false // default
   })
+
+  // selector
+  const isLogged = useSelector(state => state)
+
+  // navigate
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (!isLogged) {
+      navigate('/login')
+    }
+  }, [])
 
   // loader state
   const [isLoading, setIsLoading] = useState(false)
