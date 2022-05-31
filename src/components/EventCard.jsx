@@ -1,8 +1,9 @@
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 export default function EventCard(props) {
   // function to handle delete
-  function handleDelete() {
+  async function handleDelete() {
     // asking if they are sure about this
     const confirmDelete = window.confirm('Are you sure?')
 
@@ -10,8 +11,18 @@ export default function EventCard(props) {
       return
     }
 
-    props.onDelete()
+    // setting is deleting to true
+    setIsDeleting(true)
+
+    // deleting the event
+    await props.onDelete()
+
+    // setting isdeleting to false
+    setIsDeleting(false)
   }
+
+  // delete button state
+  const [isDeleting, setIsDeleting] = useState(false)
 
   const navigate = useNavigate()
 
@@ -37,7 +48,10 @@ export default function EventCard(props) {
           </p>
         </div>
         <div className='event-card--extras--buttons'>
-          <p className='event-card--extras--button event-card--extras--button--delete' onClick={handleDelete}>Delete now</p>
+          <p className='event-card--extras--button event-card--extras--button--delete' onClick={handleDelete} style={isDeleting ? {
+            cursor: 'default',
+            pointerEvents: 'none'
+          }: {}}>{isDeleting ? 'Deleting...' : 'Delete now'}</p>
           <p className='event-card--extras--button' onClick={handleEdit}>Edit</p>
         </div>
       </div>

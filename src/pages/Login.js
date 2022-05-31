@@ -100,7 +100,10 @@ export default function Login() {
         <form method='POST' action='#' onSubmit={handleSubmit}>
           <input type='text' placeholder='Username' className='login--form--input' name='username' value={formData.username} onChange={handleChange} />
           <input type='password' placeholder='Password' className='login--form--input' name='password' value={formData.password} onChange={handleChange} />
-          <input type='submit' value={isLoading ? 'Logging In...' : 'Log In'} className='login--form--submit' />
+          <input type='submit' value={isLoading ? 'Logging In...' : 'Log In'} className='login--form--submit' style={isLoading ? {
+            cursor: 'default',
+            pointerEvents: 'none'
+          }: {}} />
         </form>
       </div>
     </div>

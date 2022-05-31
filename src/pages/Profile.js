@@ -54,6 +54,9 @@ export default function Profile() {
       if (res.status === 200) {
         console.log('username updated successfully!')
       }
+
+      // clearing the username field
+      setUsername('')
     } catch (err) {
       // logging the error
       if (err.response) {
@@ -138,7 +141,9 @@ export default function Profile() {
           value={username}
           onChange={handleUsernameChange}
         />
-        <input type='submit' className='profile--submit' value={isLoading  ? 'UPDATING USERNAME...' : 'UPDATE USERNAME'} />
+        <input type='submit' className='profile--submit' value={isLoading  ? 'UPDATING USERNAME...' : 'UPDATE USERNAME'} disabled={isLoading} style={isLoading ? {
+          cursor: 'default'
+        }: {}} />
       </form>
       <div className='profile--separator separator'></div>
       <form className='profile--form' method='POST' onSubmit={handlePasswordsSubmit}>
@@ -169,7 +174,9 @@ export default function Profile() {
             name='confirmNewPassword'
             onChange={handlePasswordChanges}
           />
-          <input type='submit' value={passwordIsLoading ? 'UPDATING PASSWORD...' : 'UPDATE PASSWORD'} className='profile--submit update-pass' />
+          <input type='submit' value={passwordIsLoading ? 'UPDATING PASSWORD...' : 'UPDATE PASSWORD'} className='profile--submit update-pass' disabled={passwordIsLoading} style={passwordIsLoading ? {
+            cursor: 'default'
+          }: {}} />
         </div>
       </form>
     </div>

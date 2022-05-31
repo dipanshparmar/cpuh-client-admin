@@ -90,6 +90,7 @@ export default function NewEvent() {
           name='title'
           onChange={handleChange}
           value={formData.title}
+          autoFocus={true}
         />
         <div className='separator new-event--form--separator'></div>
         <textarea
@@ -140,7 +141,10 @@ export default function NewEvent() {
             </select>
           </div>
         </div>
-        <input type='submit' value={isLoading ? 'SAVING...' : 'SAVE'} className='new-event--form--submit' />
+        <input type='submit' value={isLoading ? 'SAVING...' : 'SAVE'} className='new-event--form--submit' style={isLoading ? {
+          cursor: 'default',
+          pointerEvents: 'none'
+        }: {}} />
       </form>
     </div>
   )

@@ -11,6 +11,9 @@ export default function AllEvents() {
   // loading state
   const [isLoading, setIsLoading] = useState(false)
 
+  // delete all button state
+  const [isDeletingAll, setIsDeletingAll] = useState(false)
+
   // state for serch
   const [searchQuery, setSearchQuery] = useState('')
 
@@ -115,6 +118,9 @@ export default function AllEvents() {
 
   // function to delete all the events
   async function handleDelete() {
+    // setting isdeletingall to true
+    setIsDeletingAll(true)
+
     try {
       // making a request to delete all the events
       await api.delete('events')
@@ -124,6 +130,9 @@ export default function AllEvents() {
     } catch (err) {
       // if there is an error
       console.log(err)
+    } finally {
+      // setting isdelete to false
+      setIsDeletingAll(false)
     }
   }
 
@@ -149,11 +158,12 @@ export default function AllEvents() {
       }
 
       {/* showing the delete only button only if there are events */}
-      {events.length !== 0 && <button className='all-events--delete' onClick={() => {
+      {events.length !== 0 && <button className='all-events--delete' disabled={isDeletingAll} onClick={() => {
         if (window.confirm('Are you sure you want to delete all the events?')) {
+          // deleting the events
           handleDelete()
         }
-      }}>delete all</button>}
+      }}>{isDeletingAll ? 'deleting all...': 'delete all'}</button>}
     </div>
   )
 }
