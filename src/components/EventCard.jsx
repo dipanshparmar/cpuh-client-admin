@@ -35,25 +35,23 @@ export default function EventCard(props) {
     <div className='event-card'>
       <p className='event-card--title'>{props.title}</p>
       <p className='event-card--description'>{props.description}</p>
-      <div className='event-card--extras'>
-        <div className='event-card--extras--info'>
-          <p className='event-card--date'>
-            Date: {props.day === null ? 'To be notified later': props.day}
-          </p>
-          {props.imageUrl && <p className='event-card--image-url'>
-            Image URL: {props.imageUrl}
-          </p>}
-          <p className='event-card--type'>
-            Type: {props.isFestival ? 'Festival': 'Event'}
-          </p>
-        </div>
-        <div className='event-card--extras--buttons'>
-          <p className='event-card--extras--button event-card--extras--button--delete' onClick={handleDelete} style={isDeleting ? {
-            cursor: 'default',
-            pointerEvents: 'none'
-          }: {}}>{isDeleting ? 'Deleting...' : 'Delete now'}</p>
-          <p className='event-card--extras--button' onClick={handleEdit}>Edit</p>
-        </div>
+      <div className='event-card--extras--info'>
+        <p className='event-card--date'>
+          Date: {props.day === null ? 'To be notified later': props.day}
+        </p>
+        <p className='event-card--type'>
+          Type: {props.isFestival ? 'Festival': 'Event'}
+        </p>
+        {props.imageUrl && <a className='event-card--image-url' href={props.imageUrl} target='_blank'>
+          {props.imageUrl}
+        </a>}
+      </div>
+      <div className='event-card--extras--buttons'>
+        <p className='event-card--extras--button event-card--extras--button--delete' onClick={handleDelete} style={isDeleting ? {
+          cursor: 'default',
+          pointerEvents: 'none'
+        }: {}}>{isDeleting ? 'Deleting...' : 'Delete now'}</p>
+        <p className='event-card--extras--button' onClick={handleEdit}>Edit</p>
       </div>
     </div>
   )

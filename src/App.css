@@ -212,7 +212,7 @@ a {
   flex-direction: column;
   color: white;
   row-gap: .5rem;
-  margin: 2rem;
+  margin: 2rem 2rem 1rem 2rem;
   padding-bottom: 1.5rem;
   border-bottom: .01rem solid var(--half-white);
 }
@@ -232,21 +232,31 @@ a {
   white-space: nowrap;
 }
 
-.event-card--extras {
+.event-card--extras--info {
   display: flex;
-  justify-content: space-between;
-  margin-top: .5rem;
-  font-size: .85em;
+  align-items: center;
+}
+
+.event-card--image-url {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+  text-decoration: underline;
+}
+
+.event-card--extras--info {
+  margin: 1rem 0 0 0;
 }
 
 .event-card--extras--info, .event-card--extras--buttons {
   display: flex;
   column-gap: 2rem;
+  font-size: .85rem;
 }
 
 .event-card--extras--button {
   cursor: pointer;
-  padding: .5rem;
+  padding: .5rem 0;
 }
 
 .event-card--extras--button--delete {
@@ -379,7 +389,7 @@ a {
 }
 
 .all-events--delete {
-  position: absolute;
+  position: fixed;
   bottom: 1rem;
   right: 1rem;
   text-transform: uppercase;
