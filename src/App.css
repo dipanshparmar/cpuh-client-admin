@@ -219,6 +219,9 @@ a {
 
 .event-card--title {
   font-weight: bold;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .event-card--description {
