@@ -52,19 +52,19 @@ export default function Profile() {
 
       // if ok
       if (res.status === 200) {
-        console.log('username updated successfully!')
+        alert('username updated successfully!')
       }
 
       // clearing the username field
       setUsername('')
     } catch (err) {
-      // logging the error
+      // if there is response
       if (err.response) {
-        console.log(err.response.data.message)
+        alert(err.response.data.message)
         return
       }
 
-      console.log(err)
+      alert(err)
     } finally {
       setIsLoading(false)
     }
@@ -119,12 +119,23 @@ export default function Profile() {
 
       console.log(res)
 
+      // alerting
+      alert('Password updated successfully!')
+
       // deleting the values of the fields
-      passwordForm.existingPassword = ''
-      passwordForm.existingPassword = ''
-      passwordForm.confirmNewPassword = ''
+      setPasswordForm({
+        existingPassword: '',
+        newPassword: '',
+        confirmNewPassword: ''
+      })
     } catch (err) {
-      console.log(err)
+      // if there is response
+      if (err.response) {
+        alert(err.response.data.message)
+        return
+      }
+
+      alert(err)
     } finally {
       setPasswordIsLoading(false)
     }
