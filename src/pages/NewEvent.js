@@ -73,7 +73,12 @@ export default function NewEvent() {
         isFestival: false,
       })
     } catch (err) {
-      console.log(err)
+      // if there is response
+      if (err.response) {
+        return alert(err.response.data.message)
+      }
+
+      alert(err)
     } finally {
       // set the loader state
       setIsLoading(false)
