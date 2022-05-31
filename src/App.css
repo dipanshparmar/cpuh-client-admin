@@ -91,6 +91,8 @@ a {
 .login--form--heading {
   font-weight: bold;
   color: white;
+  margin: 0 2rem;
+  text-align: center;
 }
 
 .login--form form {
@@ -400,4 +402,54 @@ a {
   font-weight: bold;
   color: red;
   cursor: pointer;
+}
+
+@media all and (max-width: 1024px) {
+  .login--form form {
+    width: 50%;
+  }
+}
+
+@media all and (max-width: 768px) {
+  .profile--row {
+    flex-direction: column;
+    row-gap: 2rem;
+  }
+
+  .event-card--extras--info {
+    flex-direction: column;
+    row-gap: 1rem;
+    align-items: flex-start;
+    margin-bottom: .5rem;
+  }
+
+  .new-event--form--row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .new-event--form--input-container {
+    margin: 0;
+    width: 100%;
+    padding: 2rem;
+  }
+}
+
+@media all and (max-width: 425px) {
+  html {
+    font-size: 14px;
+  }
+
+  .header {
+    flex-direction: column;
+    row-gap: 2rem;
+  }
+
+  .login--form form {
+    width: 80%;
+  }
+
+  .events--header {
+    flex-direction: column;
+  }
 }

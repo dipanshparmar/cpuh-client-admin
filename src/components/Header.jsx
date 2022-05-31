@@ -20,10 +20,10 @@ export default function Header() {
       <h3 className='header--logo'>
         Career Point University Hamirpur
       </h3>
-      <nav className='header--links'>
-        {isLogged && <Link to='/events' className='header--link'>Events</Link>}
-        {isLogged && <Link to='/profile' className='header--link'>Profile</Link>}
-      </nav>
+      {isLogged && <nav className='header--links'>
+        <Link to='/events' className='header--link'>Events</Link>
+        <Link to='/profile' className='header--link'>Profile</Link>
+      </nav>}
     </div>
   )
 }
