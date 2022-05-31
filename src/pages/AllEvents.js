@@ -1,6 +1,8 @@
 import EventCard from '../components/EventCard'
 import api from '../services/api'
 import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 export default function AllEvents() {
   // events state
@@ -11,6 +13,18 @@ export default function AllEvents() {
 
   // state for serch
   const [searchQuery, setSearchQuery] = useState('')
+
+  // selector
+  const isLogged = useSelector(state => state)
+
+  // navigate
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (!isLogged) {
+      navigate('/login')
+    }
+  }, [])
 
   // function to handle search query change
   function handleChange(e) {

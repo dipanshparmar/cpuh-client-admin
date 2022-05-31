@@ -1,8 +1,18 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import api from '../services/api'
+import setLoginState from '../actions/setLoginState'
 
 export default function Login() {
+  // selector for login state
+  const isLogged = useSelector(state => state)
+
+  // dispatch
+  const dispatch = useDispatch()
+
+  // navigation
+  const navigate = useNavigate()
 
   // login data state
   const [formData, setFormData] = useState({
@@ -13,8 +23,14 @@ export default function Login() {
   // loading state
   const [isLoading, setIsLoading] = useState(false)
 
-  // navigation
-  const navigate = useNavigate()
+  // if I'm already logged then navigate to events
+  useEffect(() => {
+    // TODO: FIX THIS
+    console.log(isLogged)
+    if(isLogged) {
+      return navigate('/events')
+    }
+  }, [])
 
   // function to handle the change
   function handleChange(e) {
@@ -56,6 +72,9 @@ export default function Login() {
 
       // if res is 200 then we are authenticated
       if (res.status === 200) {
+        // setting the logged state to true
+        dispatch(setLoginState(true))
+
         // navigate the user to the home
         return navigate('/events', {replace: true})
       }

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 import api from '../services/api'
 
@@ -54,6 +55,15 @@ export default function Edit(props) {
   }
 
   const navigate = useNavigate()
+
+  // selector
+  const isLogged = useSelector(state => state)
+
+  useEffect(() => {
+    if (!isLogged) {
+      navigate('/login')
+    }
+  }, [])
 
   // handling submit
   async function handleSubmit(e) {
